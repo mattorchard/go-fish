@@ -1,0 +1,159 @@
+.hearts, .diamonds {
+    color: #EA4335;
+    fill: #EA4335;
+}
+.card {
+    width: 20vmin;
+    height: 30vmin;
+    min-width: 100px;
+    min-height: 150px;
+    position: relative;
+    font-size: 2rem;
+    font-weight: bold;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+    z-index: 0;
+    box-shadow: 0 .5rem .5rem lightgray;
+}
+.card--fliped {
+    transform: rotateY(180deg);
+}
+
+.card__back, .card__face {
+    padding: .1em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.card__back {
+    border: .1em solid white;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    background-color: #EA4335;
+    background-image: url("../resources/card-back.svg");
+}
+
+.card__face {
+    display: flex;
+    background-color: white;
+}
+
+.rank:last-child {
+    transform: rotateZ(180deg);
+    backface-visibility: hidden;
+}
+
+.pips {
+
+    margin: 1vmin;
+    display: grid;
+    align-items: center;
+    grid-gap: .1em;
+}
+.pips--2, .pips--3 {
+    grid-template:
+    ". a ." 1fr
+    ". c ." 1fr
+    ". b ." 1fr
+    / 1fr 3fr 1fr;
+}
+
+.pips--4, .pips--6 {
+    grid-template:
+            "a . b" 1fr
+            "f . e" 1fr
+            "c . d" 1fr
+    / 2fr 1fr 2fr;
+}
+
+.pips--5 {
+    grid-template:
+            "a . b" 1fr
+            ". c ." 1fr
+            "d . e" 1fr
+    / 1fr 1fr 1fr;
+}
+
+.pips--7 {
+    grid-template:
+            "a . b" 1fr
+            ". c ." .5fr
+            "d . e" 1fr
+            "f . g" 1fr
+    / 1fr 1fr 1fr;
+}
+
+.pips--8 {
+    grid-template:
+            "a . b" 1fr
+            "c . d" 1fr
+            "e . f" 1fr
+            "g . h" 1fr
+    / 2fr 1fr 2fr;
+}
+
+.pips--9 {
+    grid-template:
+            "a b c" 1fr
+            "d e f" 1fr
+            "g h i" 1fr
+    / 1fr 1fr 1fr;
+}
+
+.pips--10 {
+    grid-template:
+            "a . b" 1fr
+            "c . d" 1fr
+            "e . f" 1fr
+            "g . h" 1fr
+            "i . j" 1fr
+    / 2fr 1fr 2fr;
+}
+
+.pips > .suit-icon:nth-child(1) {
+    grid-area: a;
+}
+.pips > .suit-icon:nth-child(2) {
+    grid-area: b;
+}
+.pips > .suit-icon:nth-child(3) {
+    grid-area: c;
+}
+.pips > .suit-icon:nth-child(4) {
+    grid-area: d;
+}
+.pips > .suit-icon:nth-child(5) {
+    grid-area: e;
+}
+.pips > .suit-icon:nth-child(6) {
+    grid-area: f;
+}
+.pips > .suit-icon:nth-child(7) {
+    grid-area: g;
+}
+.pips > .suit-icon:nth-child(8) {
+    grid-area: h;
+}
+.pips > .suit-icon:nth-child(9) {
+    grid-area: i;
+}
+.pips > .suit-icon:nth-child(10) {
+    grid-area: j;
+}
+
+.suit-icon {
+    width: 100%;
+    height: auto;
+}
+
+.face-card-art {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+}

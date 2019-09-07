@@ -17,7 +17,7 @@ code {
 svg {
   fill: currentColor;
 }
-ul {
+ul, ol {
   list-style: none;
   padding: 0;
 }

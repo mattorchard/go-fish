@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
 import Hand from "./components/Hand";
-import OponentHand from "./components/OponentHand";
+import OpponentHand from "./components/OponentHand";
+import Spread from "./components/Spread";
+
 
 const defaultHand = [
   {suit: "hearts", rank: "A"},
@@ -18,12 +20,15 @@ const defaultHand = [
   {suit: "diamonds", rank: "Q"},
   {suit: "spades", rank: "K"},
 ];
-
+const smallHand = [
+  {suit: "spades", rank: 6},
+  {suit: "hearts", rank: 7},
+];
 
 function App() {
   return <>
-    <OponentHand cards={defaultHand}/>
-
+    <OpponentHand cards={defaultHand}/>
+    <Spread cards={smallHand}/>
     {/*Stacks*/}
     {/*<DrawPile cardCount={52}/>*/}
     {/*Stacks*/}

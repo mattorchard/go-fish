@@ -1,20 +1,21 @@
 import React from "react";
 import Card from "./Card";
 
-const OpponentHand = ({cards}) => <ul className="opponent-hand card-sized">{
+const OpponentHand = ({cards}) => <ol
+  className="opponent-hand card--large"
+  style={{"--child-count": cards.length}}>
+  {
   cards.map(({suit, rank}, index) =>
     <li
       key={`${rank}-${suit}`}
       className="opponent-hand__slot"
-      style={{
-        "--child-index": index,
-        "--child-count": cards.length
-      }}>
+      style={{ "--child-index": index }}>
       <Card
         suit={suit}
         rank={rank}
+        size="medium"
         flipped/>
     </li>
-  )}</ul>;
+  )}</ol>;
 
 export default OpponentHand;

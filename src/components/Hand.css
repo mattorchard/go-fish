@@ -29,7 +29,7 @@
 
 .opponent-hand {
     position: relative;
-    transform: scale(.75);
+    --child-count: 0;
 }
 .opponent-hand .card {
     box-shadow: 0 .5rem .5rem rgba(20,20,20,.1);
@@ -41,7 +41,15 @@
     left: 50%;
     transform-origin: 50% 0;
     --child-index: 0;
-    --child-count: 0;
     --child-ratio: calc(var(--child-index) / var(--child-count));
     transform: translate(-50%, 25%) rotateZ(80deg) rotateZ(calc(var(--child-ratio) * -170deg));
+}
+
+.spread {
+    display: grid;
+    --child-count: 1;
+    grid-template-rows: repeat(calc(var(--child-count) - 1), 2.5em) auto;
+}
+.spread .card {
+    box-shadow: 0 .2rem .5rem rgba(20,20,20,.2);
 }

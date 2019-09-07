@@ -5,7 +5,22 @@
 .clubs, .spades {
     color: black;
 }
-.card-sized {
+
+.card--small {
+    width: 10vmin;
+    height: 15vmin;
+    min-width: 50px;
+    min-height: 75px;
+}
+
+.card--medium {
+    width: 15vmin;
+    height: 22.5vmin;
+    min-width: 75px;
+    min-height: 112px;
+}
+
+.card--large {
     width: 20vmin;
     height: 30vmin;
     min-width: 100px;
@@ -57,15 +72,21 @@
     width: 1ch;
 }
 
+.card--small .rank {
+    font-size: 1rem;
+}
+
 .rank:last-child {
     transform: rotateZ(180deg);
     backface-visibility: hidden;
 }
 
 .pips {
-    margin: 1vmin;
     display: grid;
     align-items: center;
+}
+.card--large .pips {
+    margin: 1vmin;
     grid-gap: .1em;
 }
 .pips--2, .pips--3 {

@@ -2,7 +2,11 @@
     color: #EA4335;
     fill: #EA4335;
 }
+.clubs, .spades {
+    color: black;
+}
 .card {
+    user-select: none;
     width: 20vmin;
     height: 30vmin;
     min-width: 100px;
@@ -13,9 +17,9 @@
     transform-style: preserve-3d;
     transition: transform 1s ease;
     z-index: 0;
-    box-shadow: 0 .5rem .5rem lightgray;
+    box-shadow: 0 .5rem .5rem rgba(20,20,20,.2);
 }
-.card--fliped {
+.card--flipped {
     transform: rotateY(180deg);
 }
 
@@ -41,13 +45,23 @@
     background-color: white;
 }
 
+.rank {
+    font-stretch: ultra-condensed;
+    line-height: .9em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.rank > .suit-icon {
+    width: 1ch;
+}
+
 .rank:last-child {
     transform: rotateZ(180deg);
     backface-visibility: hidden;
 }
 
 .pips {
-
     margin: 1vmin;
     display: grid;
     align-items: center;
@@ -55,62 +69,69 @@
 }
 .pips--2, .pips--3 {
     grid-template:
-    ". a ." 1fr
-    ". c ." 1fr
-    ". b ." 1fr
-    / 1fr 3fr 1fr;
+    ". a ." minmax(0, 1fr)
+    ". c ." minmax(0, 1fr)
+    ". b ." minmax(0, 1fr)
+    / minmax(0, 1fr) minmax(0, 3fr) minmax(0, 1fr);
 }
 
 .pips--4, .pips--6 {
     grid-template:
-            "a . b" 1fr
-            "f . e" 1fr
-            "c . d" 1fr
+            "a . c" minmax(0, 1fr)
+            "e . f" minmax(0, 1fr)
+            "b . d" minmax(0, 1fr)
     / 2fr 1fr 2fr;
 }
 
 .pips--5 {
     grid-template:
-            "a . b" 1fr
-            ". c ." 1fr
-            "d . e" 1fr
+            "a . c" 1fr
+            ". e ." 1fr
+            "d . b" 1fr
     / 1fr 1fr 1fr;
 }
 
 .pips--7 {
     grid-template:
-            "a . b" 1fr
-            ". c ." .5fr
-            "d . e" 1fr
-            "f . g" 1fr
+            "a . c" 1fr
+            ". f ." .5fr
+            "g . e" 1fr
+            "b . d" 1fr
     / 1fr 1fr 1fr;
 }
 
+.pips--8 > .suit-icon {
+    padding: .2rem;
+}
 .pips--8 {
     grid-template:
-            "a . b" 1fr
-            "c . d" 1fr
-            "e . f" 1fr
-            "g . h" 1fr
-    / 2fr 1fr 2fr;
+            "a c" minmax(0, 1fr)
+            "e g" minmax(0, 1fr)
+            "f h" minmax(0, 1fr)
+            "b d" minmax(0, 1fr)
+    / minmax(0, 1fr) minmax(0, 1fr);
 }
 
 .pips--9 {
     grid-template:
-            "a b c" 1fr
-            "d e f" 1fr
+            "a c e" 1fr
             "g h i" 1fr
+            "b d f" 1fr
     / 1fr 1fr 1fr;
 }
 
 .pips--10 {
+    margin-top: 0;
+    margin-bottom: 0;
+    grid-gap: 0;
     grid-template:
-            "a . b" 1fr
-            "c . d" 1fr
-            "e . f" 1fr
-            "g . h" 1fr
-            "i . j" 1fr
-    / 2fr 1fr 2fr;
+    "a . c"
+    ". e ."
+    "g . i"
+    "h . j"
+    ". f ."
+    "b . d"
+    / 1fr 1fr 1fr;
 }
 
 .pips > .suit-icon:nth-child(1) {
@@ -144,9 +165,18 @@
     grid-area: j;
 }
 
+.pips {
+    overflow: hidden;
+}
+
+.pips > .suit-icon:nth-child(even) {
+    transform: scaleY(-1)
+}
+
 .suit-icon {
     width: 100%;
-    height: auto;
+    max-height: 100%;
+    padding: 0;
 }
 
 .face-card-art {

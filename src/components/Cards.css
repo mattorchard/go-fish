@@ -124,7 +124,10 @@
 }
 
 .pips--8 > .suit-icon {
-    padding: .2rem;
+    padding: 1vmin;
+}
+.card--small .pips--8 > .suit-icon {
+    padding: 0.5vmin;
 }
 .pips--8 {
     grid-template:

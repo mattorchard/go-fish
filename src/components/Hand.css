@@ -53,3 +53,7 @@
 .spread .card {
     box-shadow: 0 .2rem .5rem rgba(20,20,20,.2);
 }
+
+.draw-pile .card {
+    box-shadow: 0 .2rem .5rem rgba(20,20,20,.4);
+}

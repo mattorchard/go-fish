@@ -53,6 +53,7 @@
     backface-visibility: hidden;
     transform: rotateY(180deg);
     background-color: #EA4335;
+    background-size: 50%;
     background-image: url("../resources/card-back.svg");
 }
 

@@ -3,6 +3,7 @@ import './App.css';
 import Hand from "./components/Hand";
 import OpponentHand from "./components/OponentHand";
 import Spread from "./components/Spread";
+import DrawPile from "./components/DrawPile";
 
 
 const defaultHand = [
@@ -29,9 +30,7 @@ function App() {
   return <>
     <OpponentHand cards={defaultHand}/>
     <Spread cards={smallHand}/>
-    {/*Stacks*/}
-    {/*<DrawPile cardCount={52}/>*/}
-    {/*Stacks*/}
+    <DrawPile cardCount={0}/>
     <Hand cards={defaultHand}/>
   </>;
 }

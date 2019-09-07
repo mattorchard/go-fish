@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 
 const OpponentHand = ({cards}) => <ol
-  className="opponent-hand card--large"
+  className="opponent-hand card--medium"
   style={{"--child-count": cards.length}}>
   {
   cards.map(({suit, rank}, index) =>

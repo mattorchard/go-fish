@@ -42,7 +42,7 @@
     transform-origin: 50% 0;
     --child-index: 0;
     --child-ratio: calc(var(--child-index) / var(--child-count));
-    transform: translate(-50%, 25%) rotateZ(80deg) rotateZ(calc(var(--child-ratio) * -170deg));
+    transform: translate(-50%, -25%) rotateZ(80deg) rotateZ(calc(var(--child-ratio) * -170deg)) translate(0, 1rem);
 }
 
 .spread {

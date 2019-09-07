@@ -5,6 +5,10 @@
     margin: 2em;
 }
 
+.hand .card {
+    box-shadow: 0 .5rem .5rem rgba(20,20,20,.2);
+}
+
 .hand__slot {
     margin-right: -1.2rem;
     transition: transform .3s ease;
@@ -22,13 +26,22 @@
     transition-delay: 0s;
 }
 
-.hand__slot__collapsing {
-    animation: collapse .5s ease;
-    overflow: hidden;
-}
 
-@keyframes collapse {
-    to {
-        width: 0;
-    }
+.opponent-hand {
+    position: relative;
+    transform: scale(.75);
+}
+.opponent-hand .card {
+    box-shadow: 0 .5rem .5rem rgba(20,20,20,.1);
+}
+.opponent-hand__slot {
+    position: absolute;
+    transition: transform .5s ease;
+    top: 0;
+    left: 50%;
+    transform-origin: 50% 0;
+    --child-index: 0;
+    --child-count: 0;
+    --child-ratio: calc(var(--child-index) / var(--child-count));
+    transform: translate(-50%, 25%) rotateZ(80deg) rotateZ(calc(var(--child-ratio) * -170deg));
 }

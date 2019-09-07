@@ -5,19 +5,20 @@
 .clubs, .spades {
     color: black;
 }
-.card {
-    user-select: none;
+.card-sized {
     width: 20vmin;
     height: 30vmin;
     min-width: 100px;
     min-height: 150px;
+}
+.card {
+    user-select: none;
     position: relative;
     font-size: 2rem;
     font-weight: bold;
     transform-style: preserve-3d;
     transition: transform 1s ease;
     z-index: 0;
-    box-shadow: 0 .5rem .5rem rgba(20,20,20,.2);
 }
 .card--flipped {
     transform: rotateY(180deg);

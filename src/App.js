@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Hand from "./components/Hand";
+import OponentHand from "./components/OponentHand";
 
 const defaultHand = [
   {suit: "hearts", rank: "A"},
@@ -10,7 +11,6 @@ const defaultHand = [
   {suit: "clubs", rank: 5},
   {suit: "spades", rank: 6},
   {suit: "hearts", rank: 7},
-  {suit: "diamonds", rank: 8},
   {suit: "spades", rank: 8},
   {suit: "spades", rank: 9},
   {suit: "hearts", rank: 10},
@@ -19,8 +19,14 @@ const defaultHand = [
   {suit: "spades", rank: "K"},
 ];
 
+
 function App() {
   return <>
+    <OponentHand cards={defaultHand}/>
+
+    {/*Stacks*/}
+    {/*<DrawPile cardCount={52}/>*/}
+    {/*Stacks*/}
     <Hand cards={defaultHand}/>
   </>;
 }

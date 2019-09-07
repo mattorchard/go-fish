@@ -12,7 +12,7 @@ const Pips = ({rank, suit}) => <div className={`pips pips--${rank}`}>{
   Repeat(parseInt(rank), () => <SuitIcon suit={suit}/>)}
 </div>;
 
-const Card = ({suit, rank, flipped=false}) => <div className={`card ${flipped && "card--flipped"}`}>
+const Card = ({suit, rank, flipped=false}) => <div className={`card card-sized ${flipped && "card--flipped"}`}>
   <div className="card__back"/>
   <div className={`card__face ${suit}`}>
       <div className="rank">

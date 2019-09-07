@@ -1,23 +1,27 @@
 import React from 'react';
 import './App.css';
-import Card from "./components/Card";
+import Hand from "./components/Hand";
 
+const defaultHand = [
+  {suit: "hearts", rank: "A"},
+  {suit: "diamonds", rank: 2},
+  {suit: "clubs", rank: 3},
+  {suit: "hearts", rank: 4},
+  {suit: "clubs", rank: 5},
+  {suit: "spades", rank: 6},
+  {suit: "hearts", rank: 7},
+  {suit: "diamonds", rank: 8},
+  {suit: "spades", rank: 8},
+  {suit: "spades", rank: 9},
+  {suit: "hearts", rank: 10},
+  {suit: "clubs", rank: "J"},
+  {suit: "diamonds", rank: "Q"},
+  {suit: "spades", rank: "K"},
+];
 
 function App() {
   return <>
-    <Card suit="hearts" rank="A"/>
-    <Card suit="hearts" rank="2"/>
-    <Card suit="hearts" rank="3"/>
-    <Card suit="hearts" rank="4"/>
-    <Card suit="hearts" rank="5"/>
-    <Card suit="hearts" rank="6"/>
-    <Card suit="hearts" rank="7"/>
-    <Card suit="hearts" rank="8"/>
-    <Card suit="hearts" rank="9"/>
-    <Card suit="hearts" rank="10"/>
-    <Card suit="spades" rank="J"/>
-    <Card suit="spades" rank="Q"/>
-    <Card suit="spades" rank="K"/>
+    <Hand cards={defaultHand}/>
   </>;
 }
 

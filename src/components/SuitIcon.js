@@ -11,7 +11,11 @@ const icons = {
   diamonds: diamondIcon
 };
 
-const SuitIcon = ({suit}) => <img className="suit-icon" src={icons[suit]} alt={suit}/>;
+const SuitIcon = ({suit}) => <img
+  className="suit-icon"
+  src={icons[suit]}
+  alt={suit}
+  draggable="false"/>;
 
 
 export default SuitIcon;

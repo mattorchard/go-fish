@@ -1,6 +1,6 @@
 import React from "react";
 
-const Repeat = (count, render) => new Array(count)
+const Repeat = ({count, render}) => new Array(count)
 .fill(null)
 .map((value, index) =>
   <React.Fragment key={index}>

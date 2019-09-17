@@ -1,21 +1,19 @@
 import React from "react";
-import Card from "./Card";
+import CardBack from "./CardBack";
+import Repeat from "./Repeat"
 
-const OpponentHand = ({cards}) => <ol
-  className="opponent-hand card--medium"
-  style={{"--child-count": cards.length}}>
+const OpponentHand = ({cardCount}) => <ol
+  className="opponent-hand"
+  style={{"--child-count": cardCount}}>
   {
-  cards.map(({suit, rank}, index) =>
+  <Repeat count={cardCount} render={(index =>
     <li
-      key={`${rank}-${suit}`}
       className="opponent-hand__slot"
       style={{ "--child-index": index }}>
-      <Card
-        suit={suit}
-        rank={rank}
+      <CardBack
         size="medium"
         flipped/>
     </li>
-  )}</ol>;
+  )}/>}</ol>;
 
 export default OpponentHand;

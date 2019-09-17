@@ -40,7 +40,7 @@ function App() {
       <ActivityLog message={message} messageCount={10}/>
     </aside>
     <main>
-      <OpponentHand cards={sortCards([...computer.hand])}/>
+      <OpponentHand cardCount={computer.hand.length}/>
       <div style={{display: "flex", justifyContent: "space-between"}}>
         <Pairs pairs={computer.books}/>
         <DrawPile cardCount={drawPileSize}/>

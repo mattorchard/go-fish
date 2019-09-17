@@ -1,0 +1,32 @@
+.card-text {
+    font-size: 120px;
+    text-align: center;
+    font-stretch: ultra-condensed;
+    line-height: .9em;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+.card-svg {
+    width: 100%;
+    height: auto;
+}
+.card--small {
+    width: 10vmin;
+    min-width: 50px;
+}
+
+.card--medium {
+    width: 15vmin;
+    min-width: 75px;
+}
+
+.card--large {
+    width: 20vmin;
+    min-width: 100px;
+}
+
+.card__back {
+    border: .1em solid white;
+    background-size: 50%;
+    background: #EA4335 url("../resources/card-back.svg");
+}

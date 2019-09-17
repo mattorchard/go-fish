@@ -25,6 +25,10 @@
     min-width: 100px;
 }
 
+.card {
+    background-color: white;
+}
+
 .card__back {
     border: .1em solid white;
     background-size: 50%;

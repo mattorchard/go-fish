@@ -1,48 +1,9 @@
-// import {createDeck} from "../helpers/card-helper";
+import {createDeck} from "../helpers/card-helper";
 import {Machine, assign} from "xstate";
 
-const createDeck = () => [{"rank": 6, "suit": "spades"}, {"rank": "Q", "suit": "hearts"}, {
-  "rank": 3,
-  "suit": "diamonds"
-}, {"rank": 3, "suit": "clubs"}, {"rank": 9, "suit": "spades"}, {"rank": 4, "suit": "clubs"}, {
-  "rank": 10,
-  "suit": "hearts"
-}, {"rank": 3, "suit": "spades"}, {"rank": 6, "suit": "clubs"}, {"rank": 8, "suit": "spades"}, {
-  "rank": 9,
-  "suit": "clubs"
-}, {"rank": 4, "suit": "hearts"}, {"rank": 10, "suit": "clubs"}, {"rank": 5, "suit": "spades"}, {
-  "rank": 7,
-  "suit": "hearts"
-}, {"rank": "K", "suit": "hearts"}, {"rank": "A", "suit": "spades"}, {"rank": "J", "suit": "spades"}, {
-  "rank": 9,
-  "suit": "diamonds"
-}, {"rank": 7, "suit": "clubs"}, {"rank": 6, "suit": "diamonds"}, {"rank": 8, "suit": "clubs"}, {
-  "rank": 2,
-  "suit": "clubs"
-}, {"rank": 8, "suit": "diamonds"}, {"rank": 8, "suit": "hearts"}, {"rank": "Q", "suit": "clubs"}, {
-  "rank": 5,
-  "suit": "diamonds"
-}, {"rank": 7, "suit": "spades"}, {"rank": 5, "suit": "hearts"}, {"rank": 10, "suit": "spades"}, {
-  "rank": 9,
-  "suit": "hearts"
-}, {"rank": 4, "suit": "spades"}, {"rank": 7, "suit": "diamonds"}, {"rank": "Q", "suit": "diamonds"}, {
-  "rank": 2,
-  "suit": "diamonds"
-}, {"rank": "K", "suit": "diamonds"}, {"rank": "J", "suit": "hearts"}, {"rank": 5, "suit": "clubs"}, {
-  "rank": "A",
-  "suit": "diamonds"
-}, {"rank": "K", "suit": "clubs"}, {"rank": "J", "suit": "diamonds"}, {"rank": "A", "suit": "hearts"}, {
-  "rank": "J",
-  "suit": "clubs"
-}, {"rank": "A", "suit": "clubs"}, {"rank": 2, "suit": "hearts"}, {"rank": 3, "suit": "hearts"}, {
-  "rank": 4,
-  "suit": "diamonds"
-}, {"rank": 6, "suit": "hearts"}, {"rank": 10, "suit": "diamonds"}, {"rank": "Q", "suit": "spades"}, {
-  "rank": 2,
-  "suit": "spades"
-}, {"rank": "K", "suit": "spades"}];
 
 const DELAYS = {
+  COMPUTER_CHOOSING: 2000,
   ANNOUNCING: 2000,
   STEALING: 2000,
   DRAWING: 2000,
@@ -105,7 +66,7 @@ const draw = assign(({players, deck, turnIndex}) => {
   const drawnRank = drawnCard.rank;
 
   const currentPlayer = players[turnIndex];
-  currentPlayer.hand = [...currentPlayer.hand, drawnCard];
+  currentPlayer.hand.push(drawnCard);
 
   return {
     message: `Drew a ${drawnCard.rank} of ${drawnCard.suit}`,
@@ -130,7 +91,9 @@ const steal = assign(({players, turnIndex, chosenRank}) => {
   return {
     players,
     stealSucceeded,
-    message: stealSucceeded ? `Stole ${stolenCards.length} card${stolenCards.length > 1 ? "s" : ""}` : "Go Fish"
+    message: stealSucceeded
+      ? `Stole ${stolenCards.length} card${stolenCards.length > 1 ? "s" : ""}`
+      : "Go Fish"
   };
 });
 
@@ -151,7 +114,20 @@ const flipTurn = assign(context => ({
   turnIndex: context.turnIndex ? 0 : 1
 }));
 
+const computerChoose = assign(context => {
+  const hand = context.players[1].hand;
+  const randomCard = hand[Math.floor(Math.random() * hand.length)];
+  console.log("Random Choice", randomCard);
+  return {chosenRank: randomCard.rank, message: `Got any ${randomCard.rank}s?`};
+});
+
+const chooseAgain = assign(() => ({
+  message: "Fish My Wish! Choose again"
+}));
+
 // Guards
+const isComputer = context => context.turnIndex === 1;
+
 const stealSucceed = context => context.stealSucceeded;
 
 const drewRequestedRank = ({chosenRank, drawnRank}) => chosenRank !== null && chosenRank === drawnRank;
@@ -179,7 +155,10 @@ const goFishMachine = Machine({
         }
       },
       choosing: {
-        on: {CHOOSE_RANK: {target: "announcing", actions: "choose"}}
+        on: {CHOOSE_RANK: {target: "announcing", actions: "choose"}},
+        after: {
+          [DELAYS.COMPUTER_CHOOSING]: {cond: "isComputer", target: "announcing", actions: "computerChoose"}
+        }
       },
       announcing: {
         after: {
@@ -212,7 +191,7 @@ const goFishMachine = Machine({
           "": [
             {cond: "playerWon", target: "won"},
             {cond: "playerLost", target: "lost"},
-            {cond: "drewRequestedRank", target: "choosing", actions: ["resetTurn"]},
+            {cond: "drewRequestedRank", target: "choosing", actions: ["resetTurn", "chooseAgain"]},
             {target: "choosing", actions: ["resetTurn", "flipTurn"]}
           ]
         }
@@ -227,6 +206,8 @@ const goFishMachine = Machine({
   },
   {
     actions: {
+      computerChoose,
+      chooseAgain,
       choose,
       steal,
       deal,
@@ -236,6 +217,7 @@ const goFishMachine = Machine({
       flipTurn
     },
     guards: {
+      isComputer,
       playerWon,
       playerLost,
       stealSucceed,

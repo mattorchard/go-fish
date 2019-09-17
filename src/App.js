@@ -4,18 +4,50 @@ import Hand from "./components/Hand";
 import OpponentHand from "./components/OponentHand";
 import DrawPile from "./components/DrawPile";
 import Pairs from "./components/Pairs";
-import useGoFish from "./helpers/use-go-fish";
+import goFishMachine from "./state-machines/go-fish-machine";
+import {useMachine} from "@xstate/react";
+import {sortCards} from "./helpers/card-helper";
+import ActivityLog from "./components/ActivityLog";
+
+
+const useGoFish = () => {
+  const [{context, value}, send] = useMachine(goFishMachine);
+  console.log("State machine", value, context);
+
+  const chooseRank = rank => send({type: "CHOOSE_RANK", rank});
+  const {deck, players, message, turnIndex} = context;
+  const drawPileSize = deck.length;
+  const canChoose = turnIndex === 0 && value === "choosing";
+
+  return {
+    chooseRank,
+    canChoose,
+    drawPileSize,
+    players,
+    message
+  }
+};
+
+
 
 function App() {
-  const {chooseRank, playerCards, opponentCards, playerPairs, opponentPairs, drawPileSize} = useGoFish();
+  const {chooseRank, canChoose, drawPileSize, players, message} = useGoFish();
+  const [human, computer] = players;
+
+
   return <>
-    <OpponentHand cards={opponentCards}/>
-    <div style={{display: "flex"}}>
-    <Pairs pairs={opponentPairs}/>
-    <DrawPile cardCount={drawPileSize}/>
-    <Pairs pairs={playerPairs}/>
-    </div>
-    <Hand cards={playerCards} onChooseRank={chooseRank}/>
+    <aside>
+      <ActivityLog message={message} messageCount={10}/>
+    </aside>
+    <main>
+      <OpponentHand cards={sortCards([...computer.hand])}/>
+      <div style={{display: "flex", justifyContent: "space-between"}}>
+        <Pairs pairs={computer.books}/>
+        <DrawPile cardCount={drawPileSize}/>
+        <Pairs pairs={human.books}/>
+      </div>
+      <Hand cards={sortCards([...human.hand])} onChooseRank={chooseRank} disabled={!canChoose}/>
+    </main>
   </>;
 }
 

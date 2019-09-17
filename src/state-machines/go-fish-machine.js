@@ -43,8 +43,9 @@ const createDeck = () => [{"rank": 6, "suit": "spades"}, {"rank": "Q", "suit": "
 }, {"rank": "K", "suit": "spades"}];
 
 const DELAYS = {
-  ANNOUNCE: 2000,
-  DRAW: 2000,
+  ANNOUNCING: 2000,
+  STEALING: 2000,
+  DRAWING: 2000,
   MATCHING: 2000,
 };
 
@@ -83,7 +84,7 @@ const applyMatches = ({hand: initialHand, books: initialBooks}) => {
 };
 
 // Actions
-const saveChosenRank = assign((context, event) => ({chosenRank: event.rank || "WHUT"}));
+const choose = assign((context, event) => ({chosenRank: event.rank, message: `Got any ${event.rank}s`}));
 
 const deal = assign(() => {
   const deck = createDeck();
@@ -125,10 +126,11 @@ const steal = assign(({players, turnIndex, chosenRank}) => {
   otherPlayer.hand = remainingHand;
   currentPlayer.hand.push(...stolenCards);
 
+
   return {
     players,
     stealSucceeded,
-    message: stealSucceeded ? `Stole ${stolenCards.length} cards` : "Go Fish"
+    message: stealSucceeded ? `Stole ${stolenCards.length} card${stolenCards.length > 1 ? "s" : ""}` : "Go Fish"
   };
 });
 
@@ -177,35 +179,36 @@ const goFishMachine = Machine({
         }
       },
       choosing: {
-        on: {CHOOSE_RANK: {target: "announce", actions: "saveChosenRank"}}
+        on: {CHOOSE_RANK: {target: "announcing", actions: "choose"}}
       },
-      announce: {
+      announcing: {
         after: {
-          [DELAYS.ANNOUNCE]: {target: "stealing", actions: "steal"}
+          [DELAYS.ANNOUNCING]: "stealing"
         }
       },
       stealing: {
-        on: {
-          "": [
+        entry: "steal",
+        after: {
+          [DELAYS.STEALING]: [
             {cond: "stealSucceed", target: "matching"},
             {target: "drawing"}
           ]
         }
       },
       drawing: {
+        entry: "draw",
         after: {
-          [DELAYS.DRAW]: {target: "matching", actions: "draw"}
+          [DELAYS.DRAWING]: "matching"
         }
       },
       matching: {
+        entry: "match",
         after: {
-          [DELAYS.MATCHING]: {
-            target: "endTurn", actions: "match"
-          }
+          [DELAYS.MATCHING]: "endTurn"
         }
       },
       endTurn: {
-        after: {
+        on: {
           "": [
             {cond: "playerWon", target: "won"},
             {cond: "playerLost", target: "lost"},
@@ -224,7 +227,7 @@ const goFishMachine = Machine({
   },
   {
     actions: {
-      saveChosenRank,
+      choose,
       steal,
       deal,
       match,

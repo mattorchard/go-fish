@@ -60,12 +60,12 @@
     box-shadow: 0 .2rem .5rem rgba(20,20,20,.4);
 }
 
-.pairs {
+.books {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.pairs__slot {
+.books__slot {
     margin: 0.5em;
 }

@@ -3,7 +3,7 @@ import './App.css';
 import Hand from "./components/Hand";
 import OpponentHand from "./components/OponentHand";
 import DrawPile from "./components/DrawPile";
-import Pairs from "./components/Pairs";
+import Books from "./components/Books";
 import goFishMachine from "./state-machines/go-fish-machine";
 import {useMachine} from "@xstate/react";
 import {sortCards} from "./helpers/card-helper";
@@ -42,9 +42,9 @@ function App() {
     <main>
       <OpponentHand cardCount={computer.hand.length}/>
       <div style={{display: "flex", justifyContent: "space-between"}}>
-        <Pairs pairs={computer.books}/>
+        <Books books={computer.books}/>
         <DrawPile cardCount={drawPileSize}/>
-        <Pairs pairs={human.books}/>
+        <Books books={human.books}/>
       </div>
       <Hand cards={sortCards([...human.hand])} onChooseRank={chooseRank} disabled={!canChoose}/>
     </main>

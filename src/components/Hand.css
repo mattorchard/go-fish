@@ -30,6 +30,7 @@
 .opponent-hand {
     position: relative;
     --child-count: 0;
+    width: 100%;
 }
 .opponent-hand .card {
     box-shadow: 0 .5rem .5rem rgba(20,20,20,.1);

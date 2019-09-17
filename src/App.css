@@ -1,8 +1,14 @@
 #root {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column-reverse;
     min-height: 100vh;
     background-color: darkgreen;
+}
+
+@media only screen and (min-width: 1000px) {
+    #root {
+        flex-direction: row;
+    }
+    #root > aside {width: 20%}
+    #root > main {width: 80%}
 }

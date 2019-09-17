@@ -1,0 +1,9 @@
+.activity-log {
+    background-color: white;
+    color: black;
+}
+
+.activity-log__active-message {
+    font-weight: bold;
+    font-size: larger;
+}

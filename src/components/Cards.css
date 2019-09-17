@@ -146,17 +146,21 @@
     / 1fr 1fr 1fr;
 }
 
-.pips--10 {
+.pips.pips--10 {
     margin-top: 0;
     margin-bottom: 0;
     grid-gap: 0;
+}
+.pips--10 {
     grid-template:
-    "a . c"
-    ". e ."
-    "g . i"
-    "h . j"
-    ". f ."
-    "b . d"
+    "a . c" minmax(0, 1fr)
+    "a e c" minmax(0, 1fr)
+    "g e i" minmax(0, 1fr)
+    "g . i" minmax(0, 0.5fr)
+    "h . j" minmax(0, 0.5fr)
+    "h f j" minmax(0, 1fr)
+    "b f d" minmax(0, 1fr)
+    "b . d" minmax(0, 1fr)
     / 1fr 1fr 1fr;
 }
 

@@ -31,6 +31,6 @@
 
 .card__back {
     border: .1em solid white;
-    background-size: 50%;
     background: #EA4335 url("../resources/card-back.svg");
+    background-size: 50%;
 }

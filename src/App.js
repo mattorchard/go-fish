@@ -41,10 +41,10 @@ function App() {
     </aside>
     <main>
       <OpponentHand cardCount={computer.hand.length}/>
-      <div style={{display: "flex", justifyContent: "space-between"}}>
-        <Books books={computer.books}/>
+      <div className="play-table">
+        {computer.books.length > 0 ? <Books books={computer.books}/> : <div/>}
         <DrawPile cardCount={drawPileSize}/>
-        <Books books={human.books}/>
+        {human.books.length > 0 ? <Books books={human.books}/> : <div/>}
       </div>
       <Hand cards={sortCards([...human.hand])} onChooseRank={chooseRank} disabled={!canChoose}/>
     </main>

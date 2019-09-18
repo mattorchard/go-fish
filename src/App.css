@@ -12,3 +12,10 @@
     #root > aside {width: 20%}
     #root > main {width: 80%}
 }
+
+.play-table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 2rem;
+}

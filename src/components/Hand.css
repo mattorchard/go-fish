@@ -15,7 +15,7 @@
 }
 
 .hand .card {
-    box-shadow: 0 .5rem .5rem rgba(20,20,20,.4);
+    box-shadow: 0 .2rem .5rem rgba(20,20,20,.4);
 }
 
 .hand__slot {
@@ -82,4 +82,23 @@
 
 .books__slot {
     margin: 0.5em;
+}
+
+.ui-border {
+    border: 3px dashed white;
+    border-radius: 2rem;
+    padding: 2rem;
+    position: relative;
+}
+.ui-border > .ui-border__label {
+    position: absolute;
+    background-color: darkgreen;
+    top: 0;
+    left: 0;
+    transform: translate(25%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: .4rem 1rem;
+    width: max-content;
 }

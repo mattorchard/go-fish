@@ -3,13 +3,28 @@
     flex-wrap: wrap;
     justify-content: center;
     margin: 2em;
+    transform-style: preserve-3d;
+}
+
+@supports (display: grid) {
+    .hand {
+        grid-template-columns: repeat(5, 10vw) auto;
+        grid-template-rows: repeat(5, 10vh) auto;
+        display: grid;
+    }
+}
+
+.hand .card {
+    box-shadow: 0 .2rem .5rem rgba(20,20,20,.4);
 }
 
 .hand__slot {
     margin-right: -1.2rem;
+    transform: translate(0, 0);
     transition: transform .3s ease;
     background: none;
     border: none;
+    transition-delay: 0.1s;
 }
 
 .hand__slot:not(:disabled) {
@@ -18,17 +33,72 @@
 .hand__slot:not(:disabled):hover,
 .hand__slot:not(:disabled):focus {
     outline: none;
-    transform: translate(0, -25%);
+    transform: translate(0, -4em);
     transition-delay: 0s;
 }
 
-.hand__slot__collapsing {
-    animation: collapse .5s ease;
-    overflow: hidden;
+
+.opponent-hand {
+    position: relative;
+    --child-count: 0;
+    width: 100%;
+    height: 20vh;
 }
 
-@keyframes collapse {
-    to {
-        width: 0;
-    }
+.opponent-hand .card {
+    box-shadow: 0 .5rem .5rem rgba(20,20,20,.1);
+    backface-visibility: hidden;
+}
+.opponent-hand__slot {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transition: transform .5s ease;
+    transform-origin: 50% 0;
+    --child-index: 0;
+    --child-ratio: calc(var(--child-index) / var(--child-count));
+    transform: translate(-50%, -25%) rotateZ(80deg) rotateZ(calc(var(--child-ratio) * -170deg)) translate(0, 1rem);
+}
+
+
+.spread {
+    display: grid;
+    --child-count: 1;
+    grid-template-rows: repeat(calc(var(--child-count) - 1), 2.5em) auto;
+}
+.spread .card {
+    box-shadow: 0 .2rem .5rem rgba(20,20,20,.2);
+}
+
+.draw-pile .card {
+    box-shadow: 0 .2rem .5rem rgba(20,20,20,.4);
+}
+
+.books {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.books__slot {
+    margin: 0.5em;
+}
+
+.ui-border {
+    border: 3px dashed white;
+    border-radius: 2rem;
+    padding: 2rem;
+    position: relative;
+}
+.ui-border > .ui-border__label {
+    position: absolute;
+    background-color: darkgreen;
+    top: 0;
+    left: 0;
+    transform: translate(25%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: .4rem 1rem;
+    width: max-content;
 }

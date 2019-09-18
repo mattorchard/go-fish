@@ -3,19 +3,19 @@ import Card from "./Card";
 import "./Hand.css";
 
 
-const Hand = ({cards, disabled = false}) => {
-
-  return <form className="hand">
+// Todo: Switch to use event bubbling
+const Hand = ({cards, onChooseRank, disabled}) =>
+  <form className="hand">
     {cards.map(({suit, rank}) =>
       <button
         key={`${rank}-${suit}`}
+        onClick={() => onChooseRank(rank)}
         type="button"
         className="hand__slot"
         disabled={disabled}>
         <Card suit={suit} rank={rank}/>
       </button>
     )}
-  </form>
-};
+  </form>;
 
 export default Hand;

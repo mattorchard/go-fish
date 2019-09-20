@@ -51,7 +51,7 @@ const deal = assign(() => {
   const deck = createDeck();
   const players = new Array(2).fill(null).map(() =>
     applyMatches({
-      hand: deck.splice(0, 5),
+      hand: deck.splice(0, 7),
       books: []
     }));
 

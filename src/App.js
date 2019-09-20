@@ -39,7 +39,7 @@ function App() {
     <aside>
       <ActivityLog message={message} messageCount={10}/>
     </aside>
-    <main>
+    <main className="game-frame">
       <OpponentHand cardCount={computer.hand.length}/>
       <div className="play-table">
         {computer.books.length > 0 ? <Books books={computer.books}/> : <div/>}

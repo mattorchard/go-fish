@@ -6,13 +6,6 @@
     transform-style: preserve-3d;
 }
 
-@supports (display: grid) {
-    .hand {
-        grid-template-columns: repeat(5, 10vw) auto;
-        grid-template-rows: repeat(5, 10vh) auto;
-        display: grid;
-    }
-}
 
 .hand .card {
     box-shadow: 0 .2rem .5rem rgba(20,20,20,.4);
@@ -25,6 +18,7 @@
     background: none;
     border: none;
     transition-delay: 0.1s;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .hand__slot:not(:disabled) {
@@ -37,6 +31,16 @@
     transition-delay: 0s;
 }
 
+@supports (display: grid) {
+    .hand {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+        grid-template-rows: repeat(20, minmax(0, 10vh)) auto;
+        display: grid;
+    }
+    .hand__slot {
+        margin-right: 0;
+    }
+}
 
 .opponent-hand {
     position: relative;
@@ -47,7 +51,6 @@
 
 .opponent-hand .card {
     box-shadow: 0 .5rem .5rem rgba(20,20,20,.1);
-    backface-visibility: hidden;
 }
 .opponent-hand__slot {
     position: absolute;
@@ -57,7 +60,12 @@
     transform-origin: 50% 0;
     --child-index: 0;
     --child-ratio: calc(var(--child-index) / var(--child-count));
-    transform: translate(-50%, -25%) rotateZ(80deg) rotateZ(calc(var(--child-ratio) * -170deg)) translate(0, 1rem);
+    transform: translate(-50%, -25%) rotateZ(80deg) rotateZ(calc(var(--child-ratio) * -190deg)) translate(0, 1rem);
+    backface-visibility: hidden;
+}
+
+.optimize .opponent-hand__slot {
+    backface-visibility: initial;
 }
 
 

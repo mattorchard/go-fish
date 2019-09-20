@@ -3,7 +3,7 @@ import CardBack from "./CardBack";
 import Repeat from "./Repeat"
 
 const OpponentHand = ({cardCount}) => <ol
-  className="opponent-hand"
+  className={`opponent-hand ${cardCount > 10 && "optimize"}`}
   style={{"--child-count": cardCount}}>
   {<Repeat count={cardCount} render={(index =>
       <li

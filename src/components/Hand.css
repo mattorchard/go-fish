@@ -33,9 +33,24 @@
 
 @supports (display: grid) {
     .hand {
-        grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+        grid-template-columns: repeat(4, minmax(2rem, 1fr)) auto;
         grid-template-rows: repeat(20, minmax(0, 10vh)) auto;
-        display: grid;
+        display: inline-grid;
+    }
+    @media only screen and (min-width: 1200px) {
+        .hand {
+            grid-template-columns: repeat(6, minmax(2rem, 1fr)) auto;
+        }
+    }
+    @media only screen and (min-width: 1450px) {
+        .hand {
+            grid-template-columns: repeat(7, minmax(2rem, 1fr)) auto;
+        }
+    }
+    @media only screen and (min-width: 1700px) {
+        .hand {
+            grid-template-columns: repeat(8, minmax(2rem, 1fr)) auto;
+        }
     }
     .hand__slot {
         margin-right: 0;
